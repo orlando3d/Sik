@@ -506,7 +506,7 @@ radio_transmit(uint8_t length, __xdata uint8_t * __pdata buf, __pdata uint16_t t
 
 	EX0_SAVE_DISABLE;
 
-#if defined BOARD_rfd900a || defined BOARD_rfd900p
+#if defined BOARD_rfd900a || defined BOARD_rfd900p || defined BOARD_mro900
 	PA_ENABLE = 1;		// Set PA_Enable to turn on PA prior to TX cycle
 #endif
 
@@ -520,7 +520,7 @@ radio_transmit(uint8_t length, __xdata uint8_t * __pdata buf, __pdata uint16_t t
   ret = radio_transmit_simple(length, buf, timeout_ticks);
 #endif // INCLUDE_GOLAY
   
-#if defined BOARD_rfd900a || defined BOARD_rfd900p
+#if defined BOARD_rfd900a || defined BOARD_rfd900p || defined BOARD_mro900
 	PA_ENABLE = 0;		// Set PA_Enable to off the PA after TX cycle
 #endif
 	EX0_RESTORE;
@@ -756,11 +756,10 @@ radio_configure(__pdata uint8_t air_rate)
 	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x12);	// TX state (output)
 	//set GPIO2 to GND
 #elif ENABLE_MRO900_SWITCH
-	//set GPIO1 to GND
-	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x14);
-	//set GPIO0 & GPIO2 to control the TRX switch
-	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x15);	// RX data (output)
-	register_write(EZRADIOPRO_GPIO2_CONFIGURATION, 0x12);	// TX data (output)
+	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x17);	// Diversity ANT1
+	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x18);	// Diversity ANT2
+	register_write(EZRADIOPRO_OPERATING_AND_FUNCTION_CONTROL_2, (register_read(EZRADIOPRO_OPERATING_AND_FUNCTION_CONTROL_2) & ~EZRADIOPRO_ANTDIV_MASK) | 0x80);
+	LNA_GAIN = HIGH_GAIN;
 #elif ENABLE_RFD900_SWITCH
 	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x15);	// RX data (output)
 	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x12);	// TX data (output)
@@ -902,8 +901,8 @@ radio_configure(__pdata uint8_t air_rate)
 	__code static const uint8_t power_levels[NUM_POWER_LEVELS] = { 1, 2, 5, 8, 11, 14, 17, 20 };
 
 #elif defined BOARD_mro900
-	#define NUM_POWER_LEVELS 8
-	__code static const uint8_t power_levels[NUM_POWER_LEVELS] = { 10, 12, 15, 18, 21, 24, 27, 30};
+	#define NUM_POWER_LEVELS 5
+	__code static const uint8_t power_levels[NUM_POWER_LEVELS] = { 17, 20, 27, 29, 30 };
 
 
 #endif
