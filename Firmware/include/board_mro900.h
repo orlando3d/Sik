@@ -53,13 +53,16 @@ SBIT(LED_RED,      SFR_P3, 6);
 SBIT(LED_GREEN,    SFR_P3, 7);
 SBIT(PIN_CONFIG,   SFR_P0, 2);
 SBIT(PIN_ENABLE,   SFR_P0, 3);
-//SBIT(PA_ENABLE,    SFR_P2, 5);         // Power Amplifier Enable
+SBIT(PA_ENABLE,    SFR_P2, 5);         // Power Amplifier Enable
+SBIT(LNA_GAIN,     SFR_P2, 6);		// LNA Gain set
 
 
 // Signal polarity definitions
 #define LED_ON		1				// LED Sense inverted when compared to HM_TRP
 #define LED_OFF		0
 #define BUTTON_ACTIVE	0
+#define HIGH_GAIN	0
+#define LOW_GAIN	1
 
 // UI definitions
 #define LED_BOOTLOADER	LED_RED
