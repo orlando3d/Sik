@@ -25,6 +25,7 @@ Currently, it supports the following boards:
  - RFD900
  - RFD900u
  - RFD900p
+ - MRO900
 
 Adding support for additional boards should not be difficult.
 
