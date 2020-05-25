@@ -755,9 +755,15 @@ radio_configure(__pdata uint8_t air_rate)
 	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x15);	// RX state (output)
 	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x12);	// TX state (output)
 	//set GPIO2 to GND
+#elif ENABLE_MRO900_SWITCH
+	//set GPIO1 to GND
+	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x14);
+	//set GPIO0 & GPIO2 to control the TRX switch
+	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x15);	// RX data (output)
+	register_write(EZRADIOPRO_GPIO2_CONFIGURATION, 0x12);	// TX data (output)
 #elif ENABLE_RFD900_SWITCH
 	register_write(EZRADIOPRO_GPIO0_CONFIGURATION, 0x15);	// RX data (output)
-	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x12);	// RX data (output)
+	register_write(EZRADIOPRO_GPIO1_CONFIGURATION, 0x12);	// TX data (output)
 #if RFD900_DIVERSITY
 	radio_set_diversity(DIVERSITY_ENABLED);
 #else
@@ -894,6 +900,12 @@ radio_configure(__pdata uint8_t air_rate)
 #elif defined BOARD_hm_trp || defined BOARD_rf50 || defined BOARD_rfd900u
 	#define NUM_POWER_LEVELS 8
 	__code static const uint8_t power_levels[NUM_POWER_LEVELS] = { 1, 2, 5, 8, 11, 14, 17, 20 };
+
+#elif defined BOARD_mro900
+	#define NUM_POWER_LEVELS 8
+	__code static const uint8_t power_levels[NUM_POWER_LEVELS] = { 10, 12, 15, 18, 21, 24, 27, 30};
+
+
 #endif
 
 // set the radio transmit power (in dBm)

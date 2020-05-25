@@ -55,11 +55,16 @@ __code const struct pins_user_map {
 	{1, 0}, // 0 - P1.0
 	{1, 1}, // 1 - P1.1
 };
-#elif defined BOARD_rfd900p
+#elif defined BOARD_rfd900p || defined BOARD_mro900
 	{3, 4}, // 0 - P3.4
 	{3, 3}, // 1 - P3.3
 	{1, 2}, // 2 - P1.2
 	{1, 3}, // 3 - P1.3
+	{1, 1}, // 4 - P1.1
+	{1, 0}, // 5 - P1.0
+};
+#elif defined BOARD_mro900
+	{1, 2}, // 2 - P1.2
 	{1, 1}, // 4 - P1.1
 	{1, 0}, // 5 - P1.0
 };

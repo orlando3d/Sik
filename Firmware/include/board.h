@@ -106,6 +106,8 @@
 # include "board_rfd900u.h"
 #elif defined(BOARD_rfd900p)
 # include "board_rfd900p.h"
+#elif defined(BOARD_mro900)
+# include "board_mro900.h"
 #elif defined(BOARD_rfd900pe)
 #define INCLUDE_AES
 #define BOARD_rfd900p

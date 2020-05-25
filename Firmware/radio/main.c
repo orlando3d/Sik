@@ -77,7 +77,7 @@ extern void    DMA_ISR(void)    __interrupt(INTERRUPT_DMA0);
 
 //@}
 
-__code const char g_banner_string[] = "RFD SiK " stringify(APP_VERSION_HIGH) "." stringify(APP_VERSION_LOW) " on " BOARD_NAME;
+__code const char g_banner_string[] = "MRO SiK " stringify(APP_VERSION_HIGH) "." stringify(APP_VERSION_LOW) " on " BOARD_NAME;
 __code const char g_version_string[] = stringify(APP_VERSION_HIGH) "." stringify(APP_VERSION_LOW);
 
 __pdata enum BoardFrequency	g_board_frequency;	///< board info from the bootloader
@@ -272,7 +272,7 @@ hardware_init(void)
 	ADC0MX = 0x1B;	// Set ADC0MX to temp sensor
 	REF0CN = 0x07;	// Define reference and enable temp sensor
 
-#if defined BOARD_rfd900a || defined BOARD_rfd900p
+#if defined BOARD_rfd900a || defined BOARD_rfd900p || defined BOARD_mro900
 	// PCA0, CEX0 setup and enable.
 	PCA0MD = 0x88;
 	PCA0PWM = 0x00;
