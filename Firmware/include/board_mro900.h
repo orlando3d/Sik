@@ -101,7 +101,7 @@ SBIT(LNA_GAIN,     SFR_P2, 6);		// LNA Gain set
 
 // Radio Definitions
 
-#define EZRADIOPRO_OSC_CAP_VALUE 0xFF // Measured on RFD900 V1.1
+#define EZRADIOPRO_OSC_CAP_VALUE 0xFF // Measured on MRO900
 #define ENABLE_MRO900_SWITCH 1        // Define RF switches on the module
 #define TEMP_OFFSET 45                // Use the internal offset register with this extra cal offset
 SBIT(IRQ,  SFR_P0, 1);                // Connection within RFD900 module, P0.1 is connected to nIRQ
